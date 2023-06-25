@@ -1,4 +1,4 @@
-# Dirty Vanity
+# ShellCode-NewInjection
 A POC for the new injection technique, abusing windows fork API to evade EDRs.
 
 ### Usage 
