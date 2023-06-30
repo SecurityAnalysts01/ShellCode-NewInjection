@@ -1,25 +1,24 @@
 # ShellCode-NewInjection
-A POC for the new injection technique, abusing windows fork API to evade EDRs.
+新注入技术的 POC，滥用 windows fork API 来逃避 EDR。
 
 ### Usage 
 DirtyVanity.exe [TARGET_PID_TO_REFLECT]
 
 ### Runtime steps
-  * Allocate and write shellcode to [TARGET_PID_TO_REFLECT]
-  * Fork [TARGET_PID_TO_REFLECT] to a new process
-  * Set the forked process's start address to the cloned shellcode
+ * 分配并写入shellcode到[TARGET_PID_TO_REFLECT]
+ * 将 [TARGET_PID_TO_REFLECT] 分叉到一个新进程
+ * 将分叉进程的起始地址设置为克隆的shellcode
   
 ### Shellcode
-The reflected shellcode works with ntdll API. It is generated from the included generation project `shellcode_template`, 
-curtesy of https://github.com/rainerzufalldererste/windows_x64_shellcode_template
+反射的 shellcode 可与 ntdll API 配合使用。它是从包含的生成项目`shellcode_template`生成的，
+感谢 https://github.com/rainerzufalldererste/windows_x64_shellcode_template
 
 ### Shellcode customization
-To customize the shellcode with ease:
-* Edit the `shellcode_template` function inside the `shellcode_template` project, according to the instructions in https://github.com/rainerzufalldererste/windows_x64_shellcode_template 
-* Compile it 
-* Crop the `shellcode_template` function bytes using your faivorite PE parsing tool (eg IDA)
-* Those bytes are position independet shellcode. place them in `DirtyVanity.cpp`
-* Execute DirtyVanity to watch them get Reflected
-
+定制 shellcode：
+* 根据 https://github.com/rainerzufalldererste/windows_x64_shellcode_template 中的说明，编辑 `shellcode_template` 项目内的 `shellcode_template` 函数
+* 编译
+* 使用您最喜欢的 PE 解析工具（例如 IDA）裁剪 `shellcode_template` 函数字节
+* 这些字节是与位置无关的 shellcode。将它们放在 `DirtyVanity.cpp` 中
+* 执行 DirtyVanity 来观察它们的反射
 
 
